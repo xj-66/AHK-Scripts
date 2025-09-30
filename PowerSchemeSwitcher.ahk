@@ -3,7 +3,7 @@
     功能：
       - 检测系统锁屏/解锁状态
       - 检测用户空闲时长
-      - 锁屏或空闲时切换到节能计划，解锁时切换到高性能计划
+      - 锁屏或空闲时切换到节能模式，解锁时切换到高性能模式
       - UI 可设置 GUID、检测间隔、空闲切换秒数
       - 通知支持本地和xxtui推送
     作者：x.j
@@ -194,7 +194,7 @@ ShowStatusUI(*) {
     githubLink.OnEvent("Click", (*) => Run("https://github.com/xj-66/AHK-Scripts"))
     uiWin.AddText(defaultWidth, "-----------------------------------")
 
-    uiWin.AddText("w110", "节能计划GUID：")
+    uiWin.AddText("w110", "节能模式GUID：")
     guidSaverEdit := uiWin.AddEdit("w300", PowerSaverGUID)
 
     uiWin.AddText("w110", "高性能GUID：")
