@@ -41,7 +41,7 @@ A_TrayMenu.Add("重载脚本", (*) => Reload())
 A_TrayMenu.Add("退出", (*) => ExitApp())
 TraySetIcon("shell32.dll", 167)
 ; 设置鼠标悬停在托盘图标上时显示的信息
-A_IconTip := "自动切换电源模式 - x.j"
+A_IconTip := "自动切换电源计划 - x.j"
 
 OnMessage(0x404, TrayClick)
 
@@ -181,7 +181,7 @@ ShowStatusUI(*) {
         uiWin.Show()
         return
     }
-    uiWin := Gui(, "自动切换电源模式 - x.j")
+    uiWin := Gui(, "自动切换电源计划 - x.j")
     uiWin.OnEvent("Close", (*) => uiWin := 0)
     uiWin.OnEvent("Escape", (*) => uiWin := 0)
 
