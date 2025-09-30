@@ -8,7 +8,7 @@ global fnDisabled := false
 ShowUI() {
     global fnDisabled
 
-    myGui := Gui("AlwaysOnTop +Resize", "Fn 键禁用开关")
+    myGui := Gui("AlwaysOnTop +Resize", "Fn 键禁用开关 - x.j")
     myGui.Add("Text", , "选择是否禁用 Fn 键功能：")
     toggleBtn := myGui.Add("Button", "w120 h30", fnDisabled ? "启用 Fn" : "禁用 Fn")
     toggleBtn.OnEvent("Click", (*) => ToggleFn(toggleBtn))
