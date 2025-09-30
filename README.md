@@ -18,7 +18,7 @@
 ### ⌨️ 键盘记录 & KeyHistory — `KeyHistoryViewer.ahk`
 - 🖱️ 实时捕获键盘/鼠标事件  
 - 👀 一键弹窗查看输入历史  
-- 🪟 简洁 GUI，随时开关  
+- 🖼️ 简洁 GUI，随时开关  
 
 ---
 
