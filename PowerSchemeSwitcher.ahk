@@ -3,7 +3,7 @@
     功能：
       - 检测系统锁屏/解锁状态
       - 检测用户空闲时长
-      - 锁屏或空闲时切换到节能模式，解锁时切换到高性能模式
+      - 锁屏或空闲时切换到节能，解锁时切换到高性能
       - UI 可设置 GUID、检测间隔、空闲切换秒数
       - 通知支持本地和xxtui推送
     作者：x.j
@@ -143,19 +143,19 @@ CheckLockScreen() {
     if (locked) {
         if (lastState != "locked") {
             Run("powercfg /setactive " PowerSaverGUID, , "Hide")
-            Notify(nowTime " - 已切换到节能模式（锁屏）", "电源切换", "info", useLocal, useXXTui, ApiKey)
+            Notify(nowTime " - 已切换到节能（锁屏）", "电源切换", "info", useLocal, useXXTui, ApiKey)
             lastState := "locked"
         }
     } else if (idleSec >= IdleSeconds) {
         if (lastState != "idle") {
             Run("powercfg /setactive " PowerSaverGUID, , "Hide")
-            Notify(nowTime " - 已切换到节能模式（空闲" idleSec "秒）", "电源切换", "info", useLocal, useXXTui, ApiKey)
+            Notify(nowTime " - 已切换到节能（空闲" idleSec "秒）", "电源切换", "info", useLocal, useXXTui, ApiKey)
             lastState := "idle"
         }
     } else {
         if (lastState != "unlocked") {
             Run("powercfg /setactive " HighPerformanceGUID, , "Hide")
-            Notify(nowTime " - 已切换到高性能模式", "电源切换", "info", useLocal, useXXTui, ApiKey)
+            Notify(nowTime " - 已切换到高性能", "电源切换", "info", useLocal, useXXTui, ApiKey)
             lastState := "unlocked"
         }
     }
@@ -194,7 +194,7 @@ ShowStatusUI(*) {
     githubLink.OnEvent("Click", (*) => Run("https://github.com/xj-66/AHK-Scripts"))
     uiWin.AddText(defaultWidth, "-----------------------------------")
 
-    uiWin.AddText("w110", "节能模式GUID：")
+    uiWin.AddText("w110", "节能GUID：")
     guidSaverEdit := uiWin.AddEdit("w300", PowerSaverGUID)
 
     uiWin.AddText("w110", "高性能GUID：")
@@ -288,9 +288,9 @@ UpdateUIStatus(*) {
     idleSec := idleMs // 1000
 
     nowTime := FormatTime(, "yyyy-MM-dd HH:mm:ss")
-    scheme := lastState = "locked" ? "节能模式（锁屏）"
-            : lastState = "idle" ? "节能模式（空闲）"
-            : "高性能模式"
+    scheme := lastState = "locked" ? "节能（锁屏）"
+            : lastState = "idle" ? "节能（空闲）"
+            : "高性能"
     timeText.Value := "检测时间：" nowTime
     stateText.Value := "电源计划：" scheme " | 空闲时间（秒）：" idleSec
 }
