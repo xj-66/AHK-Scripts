@@ -1,9 +1,9 @@
 /*
-    AutoHotkey v2 脚本：自动切换 Windows 电源方案
+    AutoHotkey v2 脚本：自动切换 Windows 电源计划
     功能：
       - 检测系统锁屏/解锁状态
       - 检测用户空闲时长
-      - 锁屏或空闲时切换到节能方案，解锁时切换到高性能方案
+      - 锁屏或空闲时切换到节能计划，解锁时切换到高性能计划
       - UI 可设置 GUID、检测间隔、空闲切换秒数
       - 通知支持本地和xxtui推送
     作者：x.j
@@ -175,6 +175,8 @@ ShowStatusUI(*) {
     global cbLocalNotify, cbXXTuiNotify, xxtuiKeyEdit
     global UseLocalNotify, UseXXTuiNotify, ApiKey
 
+    defaultWidth := "w300"
+
     if uiWin && WinExist("ahk_id " uiWin.Hwnd) {
         uiWin.Show()
         return
@@ -183,18 +185,16 @@ ShowStatusUI(*) {
     uiWin.OnEvent("Close", (*) => uiWin := 0)
     uiWin.OnEvent("Escape", (*) => uiWin := 0)
 
-    uiWin.AddText("w340 h90", "
-(
-AutoHotkey 电源方案自动切换脚本
+    uiWin.AddText(defaultWidth, "AutoHotkey 电源计划自动切换脚本")
+    uiWin.AddText(defaultWidth, "检测锁屏/解锁/空闲自动切换电源计划")
+    uiWin.AddText(defaultWidth, "获取电源计划GUID：powercfg /list")
 
-检测锁屏/解锁/空闲自动切换电源方案
+    ; 添加GitHub链接
+    githubLink := uiWin.AddLink("w300", "欢迎Star: <a href=`"https://github.com/xj-66/AHK-Scripts`">https://github.com/xj-66/AHK-Scripts</a>")
+    githubLink.OnEvent("Click", (*) => Run("https://github.com/xj-66/AHK-Scripts"))
+    uiWin.AddText(defaultWidth, "-----------------------------------")
 
-获取电源方案GUID：powercfg /list
-
------------------------------------
-)")
-
-    uiWin.AddText("w110", "节能方案GUID：")
+    uiWin.AddText("w110", "节能计划GUID：")
     guidSaverEdit := uiWin.AddEdit("w300", PowerSaverGUID)
 
     uiWin.AddText("w110", "高性能GUID：")
@@ -232,10 +232,10 @@ AutoHotkey 电源方案自动切换脚本
     saveBtn := uiWin.AddButton("w70", "保存设置")
     saveBtn.OnEvent("Click", SaveSettings)
 
-    uiWin.AddText("w340", "-----------------------------------")
+    uiWin.AddText(defaultWidth, "-----------------------------------")
 
-    timeText := uiWin.AddText("w340 h30", "")
-    stateText := uiWin.AddText("w340 h30", "")
+    timeText := uiWin.AddText(defaultWidth " h30", "")
+    stateText := uiWin.AddText(defaultWidth " h30", "")
 
     ; 置顶
     ; uiWin.Opt("+AlwaysOnTop")
@@ -292,7 +292,7 @@ UpdateUIStatus(*) {
             : lastState = "idle" ? "节能模式（空闲）"
             : "高性能模式"
     timeText.Value := "检测时间：" nowTime
-    stateText.Value := "电源方案：" scheme " | 空闲时间（秒）：" idleSec
+    stateText.Value := "电源计划：" scheme " | 空闲时间（秒）：" idleSec
 }
 
 TrayClick(wParam, lParam, msg, hwnd) {
