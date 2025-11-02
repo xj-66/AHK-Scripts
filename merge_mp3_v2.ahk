@@ -14,7 +14,7 @@ reencSaved      := IniRead(iniFile, "Encode", "reencode", "0")
 brSaved         := IniRead(iniFile, "Encode", "bitrate", "320k")
 
 ; ========= GUI（可缩放布局） =========
-myGui := Gui(, "MP3 合并工具")
+myGui := Gui(, "MP3 合并工具 - x.j")
 myGui.Opt("+Resize +MinSize800x560")  ; 允许缩放，并设置最小尺寸
 myGui.Show("w1200 h740")
 
